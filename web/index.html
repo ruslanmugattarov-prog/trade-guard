@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Trade Guard</title>
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 0; padding: 16px; }
+    .card { border: 1px solid #ddd; border-radius: 12px; padding: 14px; margin-bottom: 12px; }
+    .row { display:flex; gap:10px; flex-wrap:wrap; }
+    .btn { padding: 12px 14px; border-radius: 10px; border: 1px solid #ccc; background:#fff; cursor:pointer; }
+    .btn-primary { border-color:#111; }
+    .big { font-size: 18px; font-weight: 700; }
+    .muted { opacity: 0.7; }
+    .status-on { color: #0a7a2f; }
+    .status-off { color: #b00020; }
+    input { width: 100%; padding: 10px; border-radius: 10px; border: 1px solid #ccc; }
+    label { display:block; font-size: 12px; margin: 10px 0 6px; }
+    .grid { display:grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="big">Trade Guard</div>
+    <div class="muted">Контроль процесса. Не сигналы. Не PnL.</div>
+  </div>
+
+  <div class="card" id="dash">
+    <div class="big">Статус: <span id="statusText">…</span></div>
+    <div class="muted" id="statusReason"></div>
+    <div style="height:10px"></div>
+    <div class="row">
+      <div>Сделок сегодня: <b id="tradesToday">0</b></div>
+      <div>Минусов сегодня: <b id="lossesToday">0</b></div>
+      <div>Минусов подряд: <b id="lossStreak">0</b></div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="row">
+      <button class="btn btn-primary" id="btnWin">+ WIN</button>
+      <button class="btn btn-primary" id="btnLoss">– LOSS</button>
+      <button class="btn" id="btnRefresh">Обновить</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="big">Правила</div>
+    <div class="grid">
+      <div>
+        <label>Max сделок / день</label>
+        <input id="maxTradesPerDay" type="number" min="1" max="50" />
+      </div>
+      <div>
+        <label>Max минусов / день</label>
+        <input id="maxLossesPerDay" type="number" min="0" max="50" />
+      </div>
+      <div>
+        <label>Max минусов подряд</label>
+        <input id="maxLossStreak" type="number" min="1" max="50" />
+      </div>
+      <div>
+        <label>Timezone offset (мин)</label>
+        <input id="timezoneOffsetMin" type="number" min="-720" max="840" />
+      </div>
+    </div>
+    <div style="height:12px"></div>
+    <div class="row">
+      <button class="btn btn-primary" id="btnSave">Сохранить правила</button>
+      <button class="btn" id="btnEvents">История STOP</button>
+    </div>
+    <div class="muted" id="saveHint" style="margin-top:10px"></div>
+  </div>
+
+  <div class="card" id="eventsCard" style="display:none;">
+    <div class="big">История (последние 50)</div>
+    <div class="muted" id="eventsList">…</div>
+  </div>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
+
