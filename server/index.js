@@ -244,8 +244,14 @@ app.get("/api/events", (req, res) => {
 });
 
 // --- start server ---
-const PORT = 8080;
+const PORT = process.env.PORT || 8080;
+
+// root route for Render (иначе Not Found)
+app.get("/", (_, res) => {
+  res.json({ ok: true, service: "trade-guard-api" });
+});
+
 app.listen(PORT, "0.0.0.0", () => {
-  console.log(`✅ Trade Guard server is running on http://localhost:${PORT}`);
+  console.log(`✅ Trade Guard server is running on port ${PORT}`);
 });
 
