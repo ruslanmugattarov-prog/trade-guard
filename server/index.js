@@ -1,4 +1,5 @@
 import express from "express";
+import "./telegram.js";
 import cors from "cors";
 import { openDb } from "./db.js";
 
