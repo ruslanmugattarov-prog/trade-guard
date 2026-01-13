@@ -1,7 +1,7 @@
 const tg = window.Telegram?.WebApp;
 if (tg) tg.ready();
 
-const API_BASE = "http://localhost:8080";
+const API_BASE = "https://trade-guard-vw80.onrender.com";
 
 function getTgUserId() {
   const id = tg?.initDataUnsafe?.user?.id;
